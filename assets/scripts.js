@@ -37,3 +37,8 @@ function startAllOver(serverResponse) {
     alert("Email e/ou senha incorretos");
     button.style.pointerEvents = "initial";
 }
+
+function quizzCreation() {
+    document.querySelector(".quizzes-list").style.display = "none";
+    document.querySelector(".quizz-creation").style.display = "flex";
+}
