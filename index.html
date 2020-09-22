@@ -18,11 +18,11 @@
 
             <div class="submit">
                 <div>
-                    <input type="email" placeholder="E-mail">
-                    <input type="password" placeholder="Senha">
+                    <input type="email" placeholder="E-mail" class="email-input">
+                    <input type="password" placeholder="Senha" class="password-input">
                 </div>
 
-                <a class="button" href="#">Entrar</a>
+                <a class="button" href="#" onclick="verifyInputContent()">Entrar</a>
             </div>
         </section>
 
@@ -31,7 +31,7 @@
             <div class="created-quizzes">
                 <div class="add-quiz">
                     Novo<br>Quizz
-                    <img src="images/add-circle-white.svg">
+                    <img src="assets/images/add-circle-white.svg">
                 </div>
                 <div class="exemplo">Exemplo<br>Exemplo<br>Exemplo</div>
                 <div class="exemplo">Exemplo<br>Exemplo<br>Exemplo</div>
@@ -62,7 +62,7 @@
                         <input type="text" placeholder="Link pra imagem errada 3" class="wrong">
                     </div>
                 </div>
-                <img src="images/add-circle-blue.svg">
+                <img src="assets/images/add-circle-blue.svg">
             </div>
 
             <div class="new-quizz-results">
@@ -76,7 +76,7 @@
                             <input type="text" placeholder="Descrição do nível" class="input5">
                     </div>
                 </div>
-                <img src="images/add-circle-blue.svg">
+                <img src="assets/images/add-circle-blue.svg">
             </div>
 
             <a href="#">PUBLICAR</a>
@@ -114,6 +114,9 @@
                 </div>
             </div>
         </section>
+        
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="assets/scripts.js"></script>
     
     </body>
 </html>

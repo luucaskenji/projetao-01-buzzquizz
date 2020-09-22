@@ -16,7 +16,6 @@ body {
     align-items: center;
     justify-content: center;
     text-align: center;
-    display: none;
 }
 
 .login h1 {
@@ -352,7 +351,7 @@ header {
 /* ---------- End ---------- */
 .quizz-end {
     padding-top: 120px;
-    display: flex; /* Mudar para flex no JS */
+    display: none; /* Mudar para flex no JS */
     flex-direction: column;
     justify-content: center;
     align-items: center;
