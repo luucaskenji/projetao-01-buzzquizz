@@ -19,7 +19,7 @@ function verifyInputContent() {
 
 function postServerRequest(email, password) {
     objPost = { email: email, password: password }
-    var request = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v1/buzzquizz/users", objPost);
+    var request = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v1/buzzquizz/users', objPost);
     request.then(displayQuizzesList).catch(startAllOver);
 }
 
@@ -28,6 +28,9 @@ function displayQuizzesList(serverResponse) {
     document.querySelector(".quizzes-list").style.display = "flex";
 
     userToken = serverResponse.data.token;
+    
+    objHeader = {headers: {'User-Token': userToken}}
+    var getQuizzes = axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v1/buzzquizz/quizzes', objHeader);
 }
 
 function startAllOver(serverResponse) {
