@@ -287,24 +287,24 @@ header {
 /* ---------- Quizz Interface ---------- */
 .quizz-interface {
     padding-top: 120px;
-    display: flex;
+    display: none; /* Mudar para flex no JS */
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.quizz-interface > div {
+.quizz-interface > div, .quizz-end > div {
     width: 500px;
 }
 
-.quizz-interface h1 {
+.quizz-interface h1, .quizz-end h1 {
     font-family: 'Merriweather', serif;
     font-size: 32px;
     font-weight: 700;
     margin-bottom: 20px;
 }
 
-.question-container {
+.main-text {
     background-color: #6C8FB8;
     width: 100%;
     padding: 20px 30px;
@@ -347,4 +347,42 @@ header {
     font-size: 20px;
     padding-left: 12px;
     border-radius: 0 0 9px 9px;
+}
+
+/* ---------- End ---------- */
+.quizz-end {
+    padding-top: 120px;
+    display: flex; /* Mudar para flex no JS */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.result-message {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.message {
+    width: 45%;
+}
+
+.message-title {
+    color: #777777;
+    font-family: 'Merriweather', serif;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.message-text {
+    color: #777777;
+    font-family: 'Merriweather', serif;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.result-message img {
+    width: 200px;
 }
