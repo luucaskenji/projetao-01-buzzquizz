@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap');
 
 body {
     width: 100%;
@@ -142,7 +143,7 @@ header {
 
 .quizz-creation {
     padding-bottom: 60px;
-    display: flex;
+    display: none; /* TROCAR PRA display: flex; NO JS */
     flex-direction: column;
     padding-top: 120px;
     justify-content: center;
@@ -216,11 +217,11 @@ header {
 }
 
 .correct {
-    background-color: rgba(144, 238, 144, 0.5);
+    background-color: #D8F6D9;
 }
 
 .wrong {
-    background-color: rgba(255, 0, 0, 0.3);
+    background-color: #FDD8D9;
 }
 
 /* .level-results-inputs div:first-child {
@@ -281,4 +282,69 @@ header {
 .quizz-creation a:link, .quizz-creation a:visited {
     text-decoration: none;
     color: white;
+}
+
+/* ---------- Quizz Interface ---------- */
+.quizz-interface {
+    padding-top: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.quizz-interface > div {
+    width: 500px;
+}
+
+.quizz-interface h1 {
+    font-family: 'Merriweather', serif;
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.question-container {
+    background-color: #6C8FB8;
+    width: 100%;
+    padding: 20px 30px;
+    color: white;
+    font-family: 'Merriweather', serif;
+    font-weight: 700;
+    font-size: 22px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    line-height: 30px;
+    margin-bottom: 20px;
+}
+
+.answers-container {
+    display: grid;
+    grid-template-columns: 247px 247px;
+    grid-template-rows: 160px 160px;
+    gap: 6px;
+}
+
+.answer {
+    background-image: url("https://conteudo.imguol.com.br/c/noticias/a6/2020/08/28/24082020---mulher-tailandesa-usa-acafrao-como-remedio-e-tinge-gato-de-amarelo-1598648099992_v2_450x337.jpg");
+    border-radius: 10px;
+    position: relative;
+    border: 1px solid gray;
+}
+
+.answer-text {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: white;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    padding-left: 12px;
+    border-radius: 0 0 9px 9px;
 }
