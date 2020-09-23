@@ -2,6 +2,7 @@ var button = document.querySelector(".authentication");
 var userToken;
 var numberOfQuestions=1, numberOfLevels=1;
 var quizzTitle, quizzQuestion, rightAnswer, wrongAnswer;
+var objHeader;
 
 function verifyInputContent() {
     button.style.pointerEvents="none";
@@ -22,17 +23,25 @@ function verifyInputContent() {
 function postServerRequest(email, password) {
     objPost = { email: email, password: password }
     var request = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v1/buzzquizz/users', objPost);
-    request.then(displayQuizzesList).catch(startAllOver);
+    request.then(getUserToken).catch(startAllOver);
 }
 
-function displayQuizzesList(serverResponse) {
-    document.querySelector(".login").style.display = "none";
-    document.querySelector(".quizzes-list").style.display = "flex";
+function displayNextContent(hide, show) {
+    document.querySelector(hide).style.display = "none";
+    document.querySelector(show).style.display = "flex";
+}
+
+function getUserToken(serverResponse) {
+    displayNextContent(".login", ".quizzes-list");
 
     userToken = serverResponse.data.token;
-    
+    getQuizzesFromServer();
+}
+
+function getQuizzesFromServer() {    
     objHeader = {headers: {'User-Token': userToken}}
     var getQuizzes = axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v1/buzzquizz/quizzes', objHeader);
+    getQuizzes.then(displayQuizzesList);
 }
 
 function startAllOver(serverResponse) {
@@ -118,5 +127,25 @@ function createQuizz() {
         var newLevelPosition = { lowerPercentage: minimum, upperPercentage: maximum, title: levelTitle, imageLink: imgLink, description: levelDescription }
 
         objectLevels.push(newLevelPosition);
+    }
+
+    displayNextContent(".quizz-creation", ".quizzes-list");
+    postQuizzesOnServer(createdQuizzObject);
+}
+
+function postQuizzesOnServer(quizzObject) {
+    var request = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v1/buzzquizz/quizzes', quizzObject, objHeader);
+    request.then(getQuizzesFromServer);
+}
+
+function displayQuizzesList(serverResponse) {
+    quizzesQuantity = serverResponse.data.length;
+
+    for (var i=0; i<quizzesQuantity; i++) {
+        var createdQuizzElement = document.createElement("button");
+        createdQuizzElement.classList.add("quizz-card");
+        createdQuizzElement.innerText = serverResponse.data[i].title;
+
+        document.querySelector(".created-quizzes").appendChild(createdQuizzElement);
     }
 }
