@@ -235,11 +235,11 @@ header {
         "input5 input5";
 }
 
-.input1 { grid-area: input1; }
-.input2 { grid-area: input2; }
-.input3 { grid-area: input3; }
-.input4 { grid-area: input4; }
-.input5 { grid-area: input5; }
+.min-percentage { grid-area: input1; }
+.max-percentage { grid-area: input2; }
+.level-title { grid-area: input3; }
+.img-link { grid-area: input4; }
+.level-description { grid-area: input5; }
 
 .level-results-inputs input {
     outline: none;

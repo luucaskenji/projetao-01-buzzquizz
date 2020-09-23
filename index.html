@@ -72,15 +72,18 @@
             </div>
 
             <div class="new-quizz-results">
-                <div class="result-level">
-                    <span>Nível 1</span>
-                    <div class="level-results-inputs">
-                            <input type="text" placeholder="% Mínima de acerto do nível" class="input1">
-                            <input type="text" placeholder="% Máxima de acerto do nível" class="input2">                        
-                            <input type="text" placeholder="Título do Nível" class="input3">
-                            <input type="text" placeholder="Link da imagem do nível" class="input4">
-                            <input type="text" placeholder="Descrição do nível" class="input5">
+                <div class="levels-container">
+                    <div class="result-level">
+                        <span>Nível 1</span>
+                        <div class="level-results-inputs">
+                                <input type="text" placeholder="% Mínima de acerto do nível" class="min-percentage">
+                                <input type="text" placeholder="% Máxima de acerto do nível" class="max-percentage">                        
+                                <input type="text" placeholder="Título do Nível" class="level-title">
+                                <input type="text" placeholder="Link da imagem do nível" class="img-link">
+                                <input type="text" placeholder="Descrição do nível" class="level-description">
+                        </div>
                     </div>
+                    <!-- ... -->
                 </div>
                 <button onclick="addLevel()"><img src="assets/images/add-circle-blue.svg"></button>
             </div>

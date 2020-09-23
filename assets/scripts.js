@@ -55,11 +55,22 @@ function addQuestion() {
     document.querySelector(".questions-container").appendChild(newQuestion);
 }
 
+function addLevel() {
+    numberOfLevels++;
+
+    var newLevel = document.createElement("div");
+    newLevel.classList.add("result-level");
+    newLevel.innerHTML = "<span>Nível " + numberOfLevels + "</span><div class='level-results-inputs'><input type='text' placeholder='% Mínima de acerto do nível' class='min-percentage'><input type='text' placeholder='% Máxima de acerto do nível' class='max-percentage'><input type='text' placeholder='Título do Nível' class='level-title'><input type='text' placeholder='Link da imagem do nível' class='img-link'><input type='text' placeholder='Descrição do nível' class='level-description'></div>";
+
+    document.querySelector(".levels-container").appendChild(newLevel);
+}
+
 function createQuizz() {
     var createdQuizzObject = {
         title: "",
         data: {
-            questions: []
+            questions: [],
+            levels: []
         }
     };
 
@@ -70,6 +81,7 @@ function createQuizz() {
     for (var i=1; i<=numberOfQuestions; i++) {
         var possibleAnswers = [];
         var imagesSources = [];
+
         var newQuestionPosition = { question: "", answers: [], images: [] };
         objectQuestions.push(newQuestionPosition);
 
@@ -92,5 +104,19 @@ function createQuizz() {
         objectQuestions[i-1].images = imagesSources;
     }
 
-    console.log(createdQuizzObject);
+    var objectLevels = createdQuizzObject.data.levels;
+
+    for (var i=1; i<=numberOfLevels; i++) {
+        elementOrder = document.querySelector(".result-level:nth-child(" + i + ")");
+
+        var minimum = elementOrder.querySelector(".min-percentage").value;
+        var maximum = elementOrder.querySelector(".max-percentage").value;
+        var levelTitle = elementOrder.querySelector(".level-title").value;
+        var imgLink = elementOrder.querySelector(".img-link").value;
+        var levelDescription = elementOrder.querySelector(".level-description").value;
+
+        var newLevelPosition = { lowerPercentage: minimum, upperPercentage: maximum, title: levelTitle, imageLink: imgLink, description: levelDescription }
+
+        objectLevels.push(newLevelPosition);
+    }
 }
