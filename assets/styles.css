@@ -52,7 +52,7 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
-.submit .button {
+.submit button {
     width: 130px;
     height: 45px;
     background-color: #39385A;
@@ -61,16 +61,11 @@ body {
     justify-content: center;
     align-items: center;
     font-family: 'Roboto', sans-serif;
-}
-
-.button:link, .button:visited {
-    text-decoration: none;
     color: white;
     font-size: 20px;
 }
 
 /* ---------- Quizzes List ---------- */
-
 .quizzes-list {
     width: 100%;
     height: 100%;
@@ -158,7 +153,12 @@ header {
     margin-bottom: 60px;
 }
 
-.new-quizz img, .new-quizz-results img {
+.new-quizz button {
+    background: none;
+    outline: none;
+}
+
+.new-quizz button img, .new-quizz-results img {
     width: 40px;
 }
 
@@ -223,25 +223,6 @@ header {
     background-color: #FDD8D9;
 }
 
-/* .level-results-inputs div:first-child {
-    width: 100%;
-    display: flex;
-    justify-content: space-between  ;
-}
-
-.level-results-inputs div:first-child input {
-    width: 285px;
-}
-
-.level-results-inputs div:last-child input {
-    display: flex;
-    flex-direction: column;
-} */
-
-/* .new-quizz-results {
-    margin-bottom: 60px;
-} */
-
 .level-results-inputs {
     display: grid;
     grid-template-columns: 285px 285px;
@@ -267,7 +248,7 @@ header {
     border: none;
 }
 
-.quizz-creation a {
+.quizz-creation > a {
     width: 600px;
     height: 40px;
     background-color: #6C8FB8;

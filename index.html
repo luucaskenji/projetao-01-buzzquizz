@@ -22,14 +22,14 @@
                     <input type="password" placeholder="Senha" class="password-input">
                 </div>
 
-                <a href="#" class="button" onclick="verifyInputContent()">Entrar</a>
+                <button class="authentication" onclick="verifyInputContent()">Entrar</button>
             </div>
         </section>
 
         <section class="quizzes-list">
             <header>BuzzQuizz</header>
             <div class="created-quizzes">
-                <a href="#" onclick="quizzCreation()">
+                <a href="#" onclick="displayQuizzCreation()">
                     <div class="add-quiz">
                         Novo<br>Quizz
                         <img src="assets/images/add-circle-white.svg">
@@ -50,21 +50,25 @@
 
             <div class="new-quizz">
                 <input type="text" class="quizz-title" placeholder="Digite o título do seu quizz">
-                <div class="question-answers">
-                    <span>Pergunta 1</span>
-                    <input type="text" class="question" placeholder="Digite a pergunta">
-                    <div class="answers-images">
-                        <input type="text" placeholder="Digite a resposta correta" class="correct">
-                        <input type="text" placeholder="Link pra imagem correta" class="correct">
-                        <input type="text" placeholder="Digite uma resposta errada 1" class="wrong">
-                        <input type="text" placeholder="Link pra imagem errada 1" class="wrong">
-                        <input type="text" placeholder="Digite uma resposta errada 2" class="wrong">
-                        <input type="text" placeholder="Link pra imagem errada 2" class="wrong">
-                        <input type="text" placeholder="Digite uma resposta errada 3" class="wrong">
-                        <input type="text" placeholder="Link pra imagem errada 3" class="wrong">
+
+                <div class="questions-container">
+                    <div class="question-answers">
+                        <span>Pergunta 1</span>
+                        <input type="text" class="question" placeholder="Digite a pergunta">
+                        <div class="answers-images">
+                            <input type="text" placeholder="Digite a resposta correta" class="correct right-answer">
+                            <input type="text" placeholder="Link pra imagem correta" class="correct right-image-src">
+                            <input type="text" placeholder="Digite uma resposta errada 1" class="wrong wrong-answer">
+                            <input type="text" placeholder="Link pra imagem errada 1" class="wrong wrong-image-src">
+                            <input type="text" placeholder="Digite uma resposta errada 2" class="wrong wrong-answer">
+                            <input type="text" placeholder="Link pra imagem errada 2" class="wrong wrong-image-src">
+                            <input type="text" placeholder="Digite uma resposta errada 3" class="wrong wrong-answer">
+                            <input type="text" placeholder="Link pra imagem errada 3" class="wrong wrong-image-src">
+                        </div>
                     </div>
+                    <!-- ... -->
                 </div>
-                <img src="assets/images/add-circle-blue.svg">
+                <button onclick="addQuestion()"><img src="assets/images/add-circle-blue.svg"></button>
             </div>
 
             <div class="new-quizz-results">
@@ -78,10 +82,10 @@
                             <input type="text" placeholder="Descrição do nível" class="input5">
                     </div>
                 </div>
-                <img src="assets/images/add-circle-blue.svg">
+                <button onclick="addLevel()"><img src="assets/images/add-circle-blue.svg"></button>
             </div>
 
-            <a href="#">PUBLICAR</a>
+            <a href="#" onclick="createQuizz()">PUBLICAR</a>
         </section>
 
         <section class="quizz-interface">
