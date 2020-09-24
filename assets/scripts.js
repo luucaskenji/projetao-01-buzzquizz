@@ -84,26 +84,40 @@ function createQuizz() {
     };
 
     objectQuestions = createdQuizzObject.data.questions;
+
     var titleInput = document.querySelector(".quizz-title").value;
+    titleInput = adaptateString(titleInput);
+
     createdQuizzObject.title = titleInput;
 
     for (var i=1; i<=numberOfQuestions; i++) {
+        var elementOrder = document.querySelector(".question-answers:nth-child(" + i + ")");
+
+        var correctAnswer = elementOrder.querySelector(".right-answer").value;
+        correctAnswer = adaptateString(correctAnswer);
+        var correctImage = elementOrder.querySelector(".right-image-src").value;
+        var arrayWrongAnswers = elementOrder.querySelectorAll(".wrong-answer");
+        var arrayWrongImagesSources = elementOrder.querySelectorAll(".wrong-image-src");
+
+        var questionInput = elementOrder.querySelector(".question").value;
+        questionInput = adaptateString(questionInput);
+        var isValid = verifyQuestionPattern(questionInput);
+        if(!isValid) {
+            alert("Verifique se a pergunta foi digitada corretamente");
+            return;
+        }
+
         var possibleAnswers = [];
         var imagesSources = [];
 
         var newQuestionPosition = { question: "", answers: [], images: [] };
         objectQuestions.push(newQuestionPosition);
 
-        var elementOrder = document.querySelector(".question-answers:nth-child(" + i + ")");
-
-        var questionInput = elementOrder.querySelector(".question").value;
-        var correctAnswer = elementOrder.querySelector(".right-answer").value;
-        var correctImage = elementOrder.querySelector(".right-image-src").value;
-        var arrayWrongAnswers = elementOrder.querySelectorAll(".wrong-answer");
-        var arrayWrongImagesSources = elementOrder.querySelectorAll(".wrong-image-src");
-
         possibleAnswers.push(correctAnswer);
-        for (var j=0; j<=2; j++) possibleAnswers.push(arrayWrongAnswers[j].value);
+        for (var j=0; j<=2; j++) {
+            arrayWrongAnswers[j].value = adaptateString(arrayWrongAnswers[j].value);
+            possibleAnswers.push(arrayWrongAnswers[j].value);
+        }
 
         imagesSources.push(correctImage);
         for (var j=0; j<=2; j++) imagesSources.push(arrayWrongImagesSources[j].value);        
@@ -133,6 +147,19 @@ function createQuizz() {
     postQuizzesOnServer(createdQuizzObject);
 }
 
+function adaptateString(inputString) {
+    inputString = inputString.trim();
+    inputString = inputString.replace(inputString[0], inputString.charAt(0).toUpperCase());
+    console.log(inputString);
+
+    return inputString;
+}
+
+function verifyQuestionPattern(inputString) {
+    if (inputString.indexOf("?") === inputString.length-1) return true;
+    else return false;
+}
+
 function postQuizzesOnServer(quizzObject) {
     var request = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v1/buzzquizz/quizzes', quizzObject, objHeader);
     request.then(getQuizzesFromServer);
@@ -140,6 +167,8 @@ function postQuizzesOnServer(quizzObject) {
 
 function displayQuizzesList(serverResponse) {
     quizzesQuantity = serverResponse.data.length;
+    var quizzesList = document.querySelector(".created-quizzes");
+    quizzesList.innerHTML = `<button onclick='displayNextContent(".quizzes-list", ".quizz-creation")'><div class='add-quiz'>Novo<br>Quizz<img src='assets/images/add-circle-white.svg'></div></button>`
 
     for (var i=0; i<quizzesQuantity; i++) {
         var createdQuizzElement = document.createElement("button");

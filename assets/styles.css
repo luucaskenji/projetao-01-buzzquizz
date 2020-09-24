@@ -72,6 +72,7 @@ body {
     display: none; /* No JS trocar pra flex */
     justify-content: center;
     align-items: center;
+    padding-top: 120px;
 }
 
 header {
