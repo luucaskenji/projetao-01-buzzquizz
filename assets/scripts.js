@@ -1,8 +1,10 @@
 var button = document.querySelector(".authentication");
 var userToken;
 var numberOfQuestions=1, numberOfLevels=1;
-var quizzTitle, quizzQuestion, rightAnswer, wrongAnswer;
+var quizzesServerResponse;
 var objHeader;
+var questionIndex=0;
+var correctAnswer;
 
 function verifyInputContent() {
     button.style.pointerEvents="none";
@@ -150,7 +152,6 @@ function createQuizz() {
 function adaptateString(inputString) {
     inputString = inputString.trim();
     inputString = inputString.replace(inputString[0], inputString.charAt(0).toUpperCase());
-    console.log(inputString);
 
     return inputString;
 }
@@ -173,8 +174,64 @@ function displayQuizzesList(serverResponse) {
     for (var i=0; i<quizzesQuantity; i++) {
         var createdQuizzElement = document.createElement("button");
         createdQuizzElement.classList.add("quizz-card");
+        createdQuizzElement.setAttribute("onclick", "openQuizz(this)");
         createdQuizzElement.innerText = serverResponse.data[i].title;
 
         document.querySelector(".created-quizzes").appendChild(createdQuizzElement);
     }
+
+    quizzesServerResponse = serverResponse; // guarda na variável global
+}
+
+function openQuizz(chosenQuizz) {
+    displayNextContent(".quizzes-list", ".quizz-interface");
+
+    var elementTitle = chosenQuizz.innerText;
+    serverData = quizzesServerResponse.data;
+
+    for (var i=0; i<serverData.length; i++) {
+        if (elementTitle === serverData[i].title) {
+            positionInData = i;
+        }
+    }
+
+    var elementData = serverData[positionInData].data;
+
+    var elementQuestion = elementData.questions[questionIndex].question;
+    var elementAnswers = elementData.questions[questionIndex].answers;
+    correctAnswer = elementAnswers[0];
+    var elementImages = elementData.questions[questionIndex].images;
+    
+    var answerImageObject = [];
+    var answerObject = {};
+    for (var i=0; i<4; i++) {
+        answerObject.answer = elementAnswers[i];
+        answerObject.image = elementImages[i];
+        
+        answerImageObject.push(answerObject);
+        answerObject = {};
+    }
+
+    answerImageObject = shuffleAnswersArray(answerImageObject);
+
+    var quizzTitle = document.querySelector(".quizz-title");
+    var quizzQuestion = document.querySelector(".quizz-question");
+    
+    quizzTitle.innerText = elementTitle;
+    quizzQuestion.innerText = (questionIndex+1) + ". " + elementQuestion;
+
+    for (var i=1; i<=4; i++) {
+        var answerBox = document.querySelector(".answer:nth-child(" + i + ")");
+        answerBox.querySelector(".answer-text").innerText = answerImageObject[i-1].answer;
+        answerBox.style.backgroundImage = "url(" + answerImageObject[i-1].image + ")";
+    }
+
+    questionIndex++;
+}
+
+function shuffleAnswersArray(array) {
+    function randomize() { return Math.random() - 0.5 }
+    array.sort(randomize);
+
+    return array;
 }

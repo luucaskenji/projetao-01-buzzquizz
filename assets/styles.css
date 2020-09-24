@@ -164,7 +164,7 @@ header {
     width: 40px;
 }
 
-.quizz-title {
+.quizz-title-input {
     width: 100%;
     height: 50px;
     outline: none;
@@ -286,7 +286,7 @@ header {
     margin-bottom: 20px;
 }
 
-.main-text {
+.quizz-question {
     background-color: #6C8FB8;
     width: 100%;
     padding: 20px 30px;
@@ -310,7 +310,6 @@ header {
 }
 
 .answer {
-    background-image: url("https://conteudo.imguol.com.br/c/noticias/a6/2020/08/28/24082020---mulher-tailandesa-usa-acafrao-como-remedio-e-tinge-gato-de-amarelo-1598648099992_v2_450x337.jpg");
     border-radius: 10px;
     position: relative;
     border: 1px solid gray;
