@@ -201,7 +201,7 @@ function loadQuestion() {
         return array;
     }
 
-    if (questionIndex === 0) displayNextContent(".quizzes-list", ".quizz-interface");
+    if (questionIndex === 0) displayNextContent(".quizzes-list", ".quizz-interface"); // verifica se é a primeira execução da função
 
     var elementTitle = clickedQuizzTitle;
     serverData = quizzesServerResponse.data;
@@ -214,7 +214,7 @@ function loadQuestion() {
 
     var elementData = serverData[positionInData].data;
 
-    if (questionIndex === 0) questionsRemaining = elementData.questions.length;
+    if (questionIndex === 0) questionsRemaining = elementData.questions.length; // verifica se é a primeira execução da função
 
     var elementQuestion = elementData.questions[questionIndex].question;
     var elementAnswers = elementData.questions[questionIndex].answers;
@@ -233,19 +233,23 @@ function loadQuestion() {
 
     answerImageObject = shuffleAnswersArray(answerImageObject);
 
+    renderQuestion(elementTitle, elementQuestion, answerImageObject)
+    
+    questionIndex++;
+}
+
+function renderQuestion(questionTitle, questionText, shuffledArray) {
     var quizzTitle = document.querySelector(".quizz-title");
     var quizzQuestion = document.querySelector(".quizz-question");
-    
-    quizzTitle.innerText = elementTitle;
-    quizzQuestion.innerText = (questionIndex+1) + ". " + elementQuestion;
+
+    quizzTitle.innerText = questionTitle;
+    quizzQuestion.innerText = (questionIndex+1) + ". " + questionText;
 
     for (var i=1; i<=4; i++) {
         var answerBox = document.querySelector(".answer:nth-child(" + i + ")");
-        answerBox.querySelector(".answer-text").innerText = answerImageObject[i-1].answer;
-        answerBox.style.backgroundImage = "url(" + answerImageObject[i-1].image + ")";
+        answerBox.querySelector(".answer-text").innerText = shuffledArray[i-1].answer;
+        answerBox.style.backgroundImage = "url(" + shuffledArray[i-1].image + ")";
     }
-
-    questionIndex++;
 }
 
 function verifyAnswer(clickedAnswer) {
