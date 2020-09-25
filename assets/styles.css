@@ -145,7 +145,6 @@ header {
     padding-top: 120px;
     justify-content: center;
     align-items: center;
-    font-family: 'Roboto', sans-serif;
 }
 
 .new-quizz, .new-quizz-results{
@@ -173,7 +172,7 @@ header {
     padding-left: 12px;
     border-radius: 10px;
     border: 1px solid lightgray;
-    /* font-family: 'Roboto', sans-serif; */
+    font-family: 'Roboto', sans-serif;
     font-size: 18px;
 }
 
@@ -187,7 +186,7 @@ header {
 }
 
 .question-answers span, .result-level span {
-    /* font-family: 'Roboto', sans-serif; */
+    font-family: 'Roboto', sans-serif;
     font-size: 22px;
     margin-bottom: 12px;
 }
@@ -205,7 +204,7 @@ header {
     padding-left: 8px;
     font-size: 14px;
     margin-bottom: 6px;
-
+    font-family: 'Roboto', sans-serif;
 }
 
 .answers-images {
@@ -220,6 +219,7 @@ header {
     border: none;
     border-radius: 8px;
     padding-left: 8px;
+    font-family: 'Roboto', sans-serif;
 }
 
 .correct {
@@ -231,6 +231,7 @@ header {
 }
 
 .level-results-inputs {
+    
     display: grid;
     grid-template-columns: 285px 285px;
     grid-template-rows: repeat(3, 38px) 76px;
@@ -242,11 +243,11 @@ header {
         "input5 input5";
 }
 
-.min-percentage { grid-area: input1; }
-.max-percentage { grid-area: input2; }
-.level-title { grid-area: input3; }
-.img-link { grid-area: input4; }
-.level-description { grid-area: input5; }
+.min-percentage { grid-area: input1; font-family: 'Roboto', sans-serif; }
+.max-percentage { grid-area: input2; font-family: 'Roboto', sans-serif;} 
+.level-title { grid-area: input3; font-family: 'Roboto', sans-serif; }
+.img-link { grid-area: input4; font-family: 'Roboto', sans-serif; }
+.level-description { grid-area: input5; font-family: 'Roboto', sans-serif; }
 
 .level-results-inputs input {
     outline: none;
@@ -264,7 +265,9 @@ header {
     align-items: center;
     justify-content: center;
     text-align: center;
-    border-radius: 10px;  
+    border-radius: 10px; 
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
 }
 
 /* ---------- Quizz Interface ---------- */
@@ -328,6 +331,7 @@ header {
     font-family: 'Roboto', sans-serif;
     font-weight: 700;
     font-size: 20px;
+    color: #505050;
     padding-left: 12px;
     border-radius: 0 0 9px 9px;
 }
