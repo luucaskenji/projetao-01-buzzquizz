@@ -57,18 +57,18 @@ function createQuizz() {
         var imagesSources = [];
 
         var newQuestionPosition = { question: "", answers: [], images: [] };
-        objectQuestions.push(newQuestionPosition);
+        objectQuestions.push(newQuestionPosition); // cria um espaço pra nova pergunta no array questions do objeto
 
-        possibleAnswers.push(correctAnswer);
+        possibleAnswers.push(correctAnswer); // a primeira resposta no array inicialmente será a correta
         for (var j=0; j<=2; j++) {
             arrayWrongAnswers[j].value = adaptateString(arrayWrongAnswers[j].value);
-            possibleAnswers.push(arrayWrongAnswers[j].value);
+            possibleAnswers.push(arrayWrongAnswers[j].value); // as demais incluídas serão as erradas
         }
 
-        imagesSources.push(correctImage);
-        for (var j=0; j<=2; j++) imagesSources.push(arrayWrongImagesSources[j].value);        
+        imagesSources.push(correctImage); // a primeira url incluída sera a da imagem correta
+        for (var j=0; j<=2; j++) imagesSources.push(arrayWrongImagesSources[j].value); // inclusão das demais imagens (erradas)      
 
-        objectQuestions[i-1].question = questionInput;
+        objectQuestions[i-1].question = questionInput; // a posição é i-1 para começar a alocar no índice 0 do array questions
         objectQuestions[i-1].answers = possibleAnswers;
         objectQuestions[i-1].images = imagesSources;
     }

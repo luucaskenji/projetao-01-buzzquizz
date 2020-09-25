@@ -26,7 +26,7 @@ function loadQuestion() {
 
     for (var i=0; i<serverData.length; i++) {
         if (elementTitle === serverData[i].title) {
-            positionInData = i;
+            positionInData = i; // encontra em qual lugar do objeto está o quizz
         }
     }
 
@@ -37,13 +37,13 @@ function loadQuestion() {
 
     var elementQuestion = elementData.questions[questionIndex].question;
     var elementAnswers = elementData.questions[questionIndex].answers;
-    correctAnswer = elementAnswers[0];
+    correctAnswer = elementAnswers[0]; // a resposta correta foi colocada na primeira posição do array de respostas
     var elementImages = elementData.questions[questionIndex].images;
     
-    var answerImageObject = [];
-    var answerObject = {};
+    var answerImageObject = []; // array de pbjetos de respostas com suas imagens
+    var answerObject = {}; // objeto de respostas com suas imagens
     for (var i=0; i<4; i++) {
-        answerObject.answer = elementAnswers[i];
+        answerObject.answer = elementAnswers[i]; // as respostas e imagens foram colocadas no servidor com cada index de resposta sendo o mesmo index de sua respectiva imagem
         answerObject.image = elementImages[i];
         
         answerImageObject.push(answerObject);
@@ -52,9 +52,9 @@ function loadQuestion() {
 
     answerImageObject = shuffleAnswersArray(answerImageObject);
 
-    renderQuestion(elementTitle, elementQuestion, answerImageObject)
+    renderQuestion(elementTitle, elementQuestion, answerImageObject);
     
-    questionIndex++;
+    questionIndex++; // serve para percorrer as perguntas no array questions do servidor
 }
 
 function renderQuestion(questionTitle, questionText, shuffledArray) {
@@ -78,7 +78,7 @@ function verifyAnswer(clickedAnswer) {
             var answerBox = document.querySelector(".answer:nth-child(" + i + ")");
             answerBox.removeAttribute("onclick");
 
-            setTimeout(answerBox.setAttribute("onclick", "verifyAnswer(this)"), 2000);
+            setTimeout(answerBox.setAttribute("onclick", "verifyAnswer(this)"), 2000); // reabilita clicks
         }        
     }
 

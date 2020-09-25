@@ -24,11 +24,6 @@ function postServerRequest(email, password) {
     request.then(getUserToken).catch(startAllOver);
 }
 
-function displayNextContent(hide, show) {
-    document.querySelector(hide).style.display = "none";
-    document.querySelector(show).style.display = "flex";
-}
-
 function getUserToken(serverResponse) {
     userToken = serverResponse.data.token;
     getQuizzesFromServer();

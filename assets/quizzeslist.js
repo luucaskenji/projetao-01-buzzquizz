@@ -1,5 +1,10 @@
 var quizzesServerResponse;
 
+function displayNextContent(hide, show) {
+    document.querySelector(hide).style.display = "none";
+    document.querySelector(show).style.display = "flex";
+}
+
 function displayQuizzesList(serverResponse) {
     var quizzesQuantity = serverResponse.data.length;
     var quizzesList = document.querySelector(".created-quizzes");
