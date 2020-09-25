@@ -14,5 +14,7 @@ function displayQuizzesList(serverResponse) {
         document.querySelector(".created-quizzes").appendChild(createdQuizzElement);
     }
 
+    displayNextContent(".login", ".quizzes-list");
+
     quizzesServerResponse = serverResponse; // guarda na variável global
 }

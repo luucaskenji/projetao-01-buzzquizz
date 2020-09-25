@@ -30,8 +30,6 @@ function displayNextContent(hide, show) {
 }
 
 function getUserToken(serverResponse) {
-    displayNextContent(".login", ".quizzes-list");
-
     userToken = serverResponse.data.token;
     getQuizzesFromServer();
 }

@@ -90,7 +90,7 @@ function createQuizz() {
     }
 
     displayNextContent(".quizz-creation", ".quizzes-list");
-    //postQuizzesOnServer(createdQuizzObject);
+    postQuizzesOnServer(createdQuizzObject);
 }
 
 function adaptateString(inputString) {
