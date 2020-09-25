@@ -3,8 +3,12 @@ var userToken;
 var numberOfQuestions=1, numberOfLevels=1;
 var quizzesServerResponse;
 var objHeader;
+var chosenQuizzTitle;
 var questionIndex=0;
+var questionsRemaining;
 var correctAnswer;
+var auxiliary;
+var correctlyAnsweredCounter=0; 
 
 function verifyInputContent() {
     button.style.pointerEvents="none";
@@ -87,7 +91,7 @@ function createQuizz() {
 
     objectQuestions = createdQuizzObject.data.questions;
 
-    var titleInput = document.querySelector(".quizz-title").value;
+    var titleInput = document.querySelector(".quizz-title-input").value;
     titleInput = adaptateString(titleInput);
 
     createdQuizzObject.title = titleInput;
@@ -183,10 +187,23 @@ function displayQuizzesList(serverResponse) {
     quizzesServerResponse = serverResponse; // guarda na variável global
 }
 
-function openQuizz(chosenQuizz) {
-    displayNextContent(".quizzes-list", ".quizz-interface");
+function openQuizz(clickedQuizz) {
+    clickedQuizzTitle = clickedQuizz.innerText;
+    loadQuestion();
+}
 
-    var elementTitle = chosenQuizz.innerText;
+function loadQuestion() {
+
+    function shuffleAnswersArray(array) {
+        function randomize() { return Math.random() - 0.5 }
+        array.sort(randomize);
+    
+        return array;
+    }
+
+    if (questionIndex === 0) displayNextContent(".quizzes-list", ".quizz-interface");
+
+    var elementTitle = clickedQuizzTitle;
     serverData = quizzesServerResponse.data;
 
     for (var i=0; i<serverData.length; i++) {
@@ -196,6 +213,8 @@ function openQuizz(chosenQuizz) {
     }
 
     var elementData = serverData[positionInData].data;
+
+    if (questionIndex === 0) questionsRemaining = elementData.questions.length;
 
     var elementQuestion = elementData.questions[questionIndex].question;
     var elementAnswers = elementData.questions[questionIndex].answers;
@@ -229,9 +248,49 @@ function openQuizz(chosenQuizz) {
     questionIndex++;
 }
 
-function shuffleAnswersArray(array) {
-    function randomize() { return Math.random() - 0.5 }
-    array.sort(randomize);
+function verifyAnswer(clickedAnswer) {
 
-    return array;
+    function toggleClicks() {
+        for (var i=1; i<=4; i++) {
+            var answerBox = document.querySelector(".answer:nth-child(" + i + ")");
+            answerBox.removeAttribute("onclick");
+
+            setTimeout(answerBox.setAttribute("onclick", "verifyAnswer(this)"), 2000);
+        }        
+    }
+
+    function resetBackgrounds() {
+        for (var i=1; i<=4; i++) {
+            var answerBox = document.querySelector(".answer:nth-child(" + i + ")");
+            var answerTextBox = answerBox.querySelector(".answer-text");
+    
+            answerTextBox.style.backgroundColor = "white";
+        }
+    }
+
+    var clickedAnswerText = clickedAnswer.querySelector(".answer-text").innerText;
+
+    for (var i=1; i<=4; i++) {
+        var answerBox = document.querySelector(".answer:nth-child(" + i + ")");
+        var answerTextBox = answerBox.querySelector(".answer-text");
+        var answerText = answerTextBox.innerText;
+
+        if (answerText === correctAnswer) answerTextBox.style.backgroundColor = "#D8F6D9";
+        else answerTextBox.style.backgroundColor = "#FDD8D9";
+    }
+
+    if (clickedAnswerText === correctAnswer) correctlyAnsweredCounter++;
+
+    toggleClicks();
+
+    questionsRemaining--;
+    if (questionsRemaining === 0) setTimeout(displayResults, 2000);
+    else {
+        setTimeout(loadQuestion, 2000);
+        setTimeout(resetBackgrounds, 2000);
+    }
+}
+
+function displayResults() {
+    displayNextContent(".quizz-interface", ".quizz-end");
 }
