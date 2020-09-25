@@ -192,6 +192,10 @@ header {
     margin-bottom: 12px;
 }
 
+.questions-container, .levels-container {
+    width: 100%;
+}
+
 .question {
     outline: none;
     border: none;
@@ -251,20 +255,16 @@ header {
     border: none;
 }
 
-.quizz-creation > a {
+.quizz-creation > button {
     width: 600px;
     height: 40px;
     background-color: #6C8FB8;
+    color: white;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     border-radius: 10px;  
-}
-
-.quizz-creation a:link, .quizz-creation a:visited {
-    text-decoration: none;
-    color: white;
 }
 
 /* ---------- Quizz Interface ---------- */
@@ -367,5 +367,7 @@ header {
 }
 
 .result-message img {
-    width: 200px;
+    width: 45%;
+    height: auto;
+    object-fit: scale-down;
 }
