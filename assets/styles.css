@@ -287,7 +287,7 @@ header {
     margin-bottom: 20px;
 }
 
-.quizz-question {
+.quizz-question, .main-text {
     background-color: #6C8FB8;
     width: 100%;
     padding: 20px 30px;

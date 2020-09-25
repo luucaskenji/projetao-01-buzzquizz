@@ -3,11 +3,11 @@ var userToken;
 var numberOfQuestions=1, numberOfLevels=1;
 var quizzesServerResponse;
 var objHeader;
-var chosenQuizzTitle;
+var clickedQuizzTitle;
+var elementData;
 var questionIndex=0;
-var questionsRemaining;
+var questionsQuantity, questionsRemaining;
 var correctAnswer;
-var auxiliary;
 var correctlyAnsweredCounter=0; 
 
 function verifyInputContent() {
@@ -193,7 +193,7 @@ function openQuizz(clickedQuizz) {
 }
 
 function loadQuestion() {
-
+    
     function shuffleAnswersArray(array) {
         function randomize() { return Math.random() - 0.5 }
         array.sort(randomize);
@@ -212,8 +212,9 @@ function loadQuestion() {
         }
     }
 
-    var elementData = serverData[positionInData].data;
+    elementData = serverData[positionInData].data;
 
+    questionsQuantity = elementData.questions.length;
     if (questionIndex === 0) questionsRemaining = elementData.questions.length; // verifica se é a primeira execução da função
 
     var elementQuestion = elementData.questions[questionIndex].question;
@@ -288,13 +289,42 @@ function verifyAnswer(clickedAnswer) {
     toggleClicks();
 
     questionsRemaining--;
-    if (questionsRemaining === 0) setTimeout(displayResults, 2000);
+    if (questionsRemaining === 0) setTimeout(getResults, 2000);
     else {
         setTimeout(loadQuestion, 2000);
         setTimeout(resetBackgrounds, 2000);
     }
 }
 
-function displayResults() {
+function getResults() {
     displayNextContent(".quizz-interface", ".quizz-end");
+
+    var score = correctlyAnsweredCounter/questionsQuantity;
+    score *= 100;
+    score = Math.round(score);
+
+    var elementLevels = elementData.levels;
+
+    for (var i = 0; i < elementLevels.length; i++) {
+        var levelTitle = elementLevels[i].title;
+        var levelDescription = elementLevels[i].description;
+        var levelImageLink = elementLevels[i].imageLink;
+
+        var minimumPercentage = elementLevels[i].lowerPercentage;
+        var maximumPercentage = elementLevels[i].upperPercentage;
+
+        console.log(minimumPercentage, maximumPercentage);
+
+        if (score >= minimumPercentage && score <= maximumPercentage) {
+            renderResults(score, levelTitle, levelDescription, levelImageLink);
+        }
+    }
+}
+
+function renderResults(finalScore, title, description,  imageLink) {
+    document.querySelector(".quizz-end h1").innerText = clickedQuizzTitle;
+    document.querySelector(".main-text").innerHTML = "Você acertou " + correctlyAnsweredCounter + " de " + questionsQuantity + " perguntas!<br>Score: " + finalScore + "%";
+    document.querySelector(".message-title").innerText = title;
+    document.querySelector(".message-text").innerText = description;
+    document.querySelector(".result-message img").src = imageLink;
 }
